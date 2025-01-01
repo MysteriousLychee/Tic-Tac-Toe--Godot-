@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://cpper46o8pum8"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_odbqa"]
+[ext_resource type="PackedScene" uid="uid://cs2o8f6jamujj" path="res://board.tscn" id="1_yslqk"]
+[ext_resource type="PackedScene" uid="uid://b2urayc2ov6ao" path="res://cross.tscn" id="2_ci02r"]
+[ext_resource type="PackedScene" uid="uid://b37ar7detenv1" path="res://game_over_menu.tscn" id="2_xiqsj"]
+[ext_resource type="PackedScene" uid="uid://lbyjnwsmis5a" path="res://circle.tscn" id="3_nypih"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1xti1"]
+bg_color = Color(0.470588, 0.74902, 0.827451, 1)
+border_width_left = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wegke"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_size = 5
+shadow_offset = Vector2(5, 5)
+
+[node name="Main" type="Node"]
+script = ExtResource("1_odbqa")
+cross_scene = ExtResource("2_ci02r")
+circle_scene = ExtResource("3_nypih")
+
+[node name="Board" parent="." instance=ExtResource("1_yslqk")]
+position = Vector2(300, 300)
+
+[node name="SidePanel" type="Panel" parent="."]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -300.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1xti1")
+
+[node name="PlayerLabel" type="Label" parent="."]
+offset_left = 600.0
+offset_top = 120.0
+offset_right = 900.0
+offset_bottom = 187.0
+theme_override_font_sizes/font_size = 46
+text = "Next Player:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerPanel" type="Panel" parent="."]
+offset_left = 650.0
+offset_top = 200.0
+offset_right = 850.0
+offset_bottom = 400.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_wegke")
+
+[node name="GameOverMenu" parent="." instance=ExtResource("2_xiqsj")]
+process_mode = 2
+
+[connection signal="restart" from="GameOverMenu" to="." method="_on_game_over_menu_restart"]

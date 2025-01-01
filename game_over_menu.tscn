@@ -1,0 +1,66 @@
+[gd_scene load_steps=4 format=3 uid="uid://b37ar7detenv1"]
+
+[ext_resource type="Script" path="res://game_over_menu.gd" id="1_lycea"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4s4ne"]
+bg_color = Color(0, 0.461692, 0.67939, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.935501, 0.782876, 0.366764, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_py0rp"]
+bg_color = Color(0.358552, 0.658195, 0.666112, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.211521, 0.925821, 0.752429, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="GameOverMenu" type="CanvasLayer"]
+script = ExtResource("1_lycea")
+
+[node name="GameOverPanel" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -125.0
+offset_right = 50.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4s4ne")
+
+[node name="ResultLabel" type="Label" parent="."]
+offset_left = 166.5
+offset_top = 200.0
+offset_right = 433.5
+offset_bottom = 258.0
+theme_override_font_sizes/font_size = 40
+text = "Player 1 wins!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartButton" type="Button" parent="."]
+offset_left = 175.0
+offset_top = 300.0
+offset_right = 425.0
+offset_bottom = 363.0
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_py0rp")
+theme_override_styles/normal = SubResource("StyleBoxFlat_py0rp")
+text = "Play Again?"
+
+[connection signal="pressed" from="RestartButton" to="." method="_on_restart_button_pressed"]
